@@ -1,5 +1,6 @@
 import ProductList from "../components/ProductList";
 import styled from "styled-components";
+import ProductForm from "../components/ProductForm";
 
 const Heading = styled.h1`
   text-align: center;
@@ -9,6 +10,7 @@ const Heading = styled.h1`
 export default function HomePage() {
   return (
     <>
+    <ProductForm/>
       <Heading>
         <span role="img" aria-label="A fish">
           🐠
