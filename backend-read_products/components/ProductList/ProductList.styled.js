@@ -6,4 +6,5 @@ export const StyledList = styled.ul`
   gap: 1.5rem;
   justify-items: center;
   padding: 0;
+  padding-bottom: 5px;
 `;

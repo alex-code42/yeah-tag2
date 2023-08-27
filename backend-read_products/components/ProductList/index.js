@@ -14,9 +14,9 @@ export default function ProductList() {
   return (
     <StyledList>
       {data.map((product) => (
-        <li key={product.id}>
+        <li key={product._id}>
           <StyledLink
-    href={`/${product.id}`}
+    href={`/${product._id}`}
           >
             {product.name}
           </StyledLink>

@@ -1,6 +1,9 @@
+import { StyledComments } from "./Comments.styled";
+
 export default function Comments({ reviews }) {
   return (
     <>
+    <StyledComments>
       <h3>Comments</h3>
       <ul>
         {reviews.map((review) => (
@@ -11,6 +14,7 @@ export default function Comments({ reviews }) {
           </li>
         ))}
       </ul>
+      </StyledComments>
     </>
   );
 }
