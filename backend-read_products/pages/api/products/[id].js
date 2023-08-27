@@ -17,4 +17,13 @@ export default async function handler(request, response) {
 
     response.status(200).json(product);
   }
+  
+  if (request.method === "PUT") {
+    const jokeToUpdate = await Joke.findByIdAndUpdate(id, {
+      $set: request.body,
+    });
+    // Find the joke by its ID and update the content that is part of the request body!
+    response.status(200).json(jokeToUpdate);
+    // If successful, you'll receive an OK status code.
+  }
 }
