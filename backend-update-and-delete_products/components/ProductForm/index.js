@@ -2,20 +2,35 @@ import { StyledForm, StyledHeading, StyledLabel } from "./ProductForm.styled";
 import { StyledButton } from "../Button/Button.styled";
 import useSWR from "swr";
 
-export default function ProductForm({onSubmit, formHeading}) {
-  
-  const handleSubmit = (event) => {
-    // Call the onSubmit function passed as a prop
-    console.log("this is my event",event)
+export default function ProductForm() {
+  const products = useSWR("/api/products");
 
-    onSubmit(event);
-    console.log("thats the event",event)
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const productData = Object.fromEntries(formData);
+
+    const response = await fetch("/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    });
+
+    if (response.ok) {
+      await response.json();
+      products.mutate();
+      event.target.reset();
+    } else {
+      console.error(response.status);
+    }
   }
-  
 
   return (
     <StyledForm onSubmit={handleSubmit}>
-      <StyledHeading>{formHeading}</StyledHeading>
+      <StyledHeading>Add a new Fish</StyledHeading>
       <StyledLabel htmlFor="name">
         Name:
         <input type="text" id="name" name="name" />
@@ -39,5 +54,4 @@ export default function ProductForm({onSubmit, formHeading}) {
       <StyledButton type="submit">Submit</StyledButton>
     </StyledForm>
   );
-
 }
